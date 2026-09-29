@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CinePick - Movies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">CinePick</div>
+
+    <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="movies.php">Movies</a></li>
+        <li><a href="series.php">Series</a></li>
+        <li><a href="recommend.php">Recommend</a></li>
+        <li><a href="about.php">About</a></li>
+    </ul>
+
+</nav>
+
+<div class="container">
+
+    <h1 class="section-title">Movies</h1>
+
+    <div class="card-container">
+
+        <?php
+
+        while ($row = $result->fetch_assoc()) {
+
+        ?>
+
+        <div class="card">
+
+            <img src="<?php echo $row['image']; ?>" alt="Movie">
+
+            <div class="card-content">
+
+                <h3>
+                    <?php echo $row['title']; ?>
+                </h3>
+
+                <p class="genre">
+                    <?php echo $row['genre']; ?>
+                </p>
+
+                <p class="rating">
+                    ⭐ <?php echo $row['rating']; ?>/10
+                </p>
+
+                <p>
+                    <?php echo $row['description']; ?>
+                </p>
+
+                <p>
+                    <br>
+                    Released: <?php echo $row['release_year']; ?>
+                </p>
+
+            </div>
+
+        </div>
+
+        <?php
+
+        }
+
+        ?>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 CinePick
+</footer>
+
+</body>
+</html>

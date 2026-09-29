@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePick - Recommend</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">CinePick</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="series.html">Series</a></li>
+        <li><a href="recommend.html">Recommend</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <div class="recommend-box">
+        <h1>🎬 Find Something to Watch</h1>
+        <p>Select your favorite genre.</p>
+
+        <form id="recommendForm">
+            <select id="genre" required>
+                <option value="">Select Genre</option>
+                <option value="Action">Action</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Romance">Romance</option>
+                <option value="Horror">Horror</option>
+                <option value="Thriller">Thriller</option>
+            </select>
+
+            <button type="submit" class="btn">Recommend</button>
+        </form>
+    </div>
+
+    <div id="recommendations"></div>
+
+</div>
+
+<footer>
+    © 2026 CinePick
+</footer>
+
+<script>
+const content = [
+    {
+        title: "Avengers: Endgame",
+        type: "Movie",
+        genre: "Action",
+        description: "The Avengers come together for one final battle to save the universe.",
+        year: 2019,
+        rating: 8.4,
+        image: "https://via.placeholder.com/300x400?text=Avengers"
+    },
+    {
+        title: "The Dark Knight",
+        type: "Movie",
+        genre: "Action",
+        description: "Batman faces the Joker in one of his greatest battles.",
+        year: 2008,
+        rating: 9.0,
+        image: "https://via.placeholder.com/300x400?text=Dark+Knight"
+    },
+    {
+        title: "John Wick",
+        type: "Movie",
+        genre: "Action",
+        description: "A retired assassin returns to his violent past after a personal tragedy.",
+        year: 2014,
+        rating: 7.4,
+        image: "https://via.placeholder.com/300x400?text=John+Wick"
+    },
+    {
+        title: "The Boys",
+        type: "Series",
+        genre: "Action",
+        description: "A group attempts to stop corrupt superheroes from abusing their powers.",
+        year: 2019,
+        rating: 8.7,
+        image: "https://via.placeholder.com/300x400?text=The+Boys"
+    },
+    {
+        title: "The Hangover",
+        type: "Movie",
+        genre: "Comedy",
+        description: "Three friends try to remember what happened during a crazy night in Las Vegas.",
+        year: 2009,
+        rating: 7.7,
+        image: "https://via.placeholder.com/300x400?text=Hangover"
+    },
+    {
+        title: "3 Idiots",
+        type: "Movie",
+        genre: "Comedy",
+        description: "Three engineering students experience friendship, pressure and life lessons.",
+        year: 2009,
+        rating: 8.4,
+        image: "https://via.placeholder.com/300x400?text=3+Idiots"
+    },
+    {
+        title: "Superbad",
+        type: "Movie",
+        genre: "Comedy",
+        description: "Two high-school friends attempt to make their final party unforgettable.",
+        year: 2007,
+        rating: 7.6,
+        image: "https://via.placeholder.com/300x400?text=Superbad"
+    },
+    {
+        title: "The Office",
+        type: "Series",
+        genre: "Comedy",
+        description: "A hilarious look at the everyday lives of employees in a paper company.",
+        year: 2005,
+        rating: 9.0,
+        image: "https://via.placeholder.com/300x400?text=The+Office"
+    },
+    {
+        title: "La La Land",
+        type: "Movie",
+        genre: "Romance",
+        description: "A musician and an aspiring actress fall in love while chasing their dreams.",
+        year: 2016,
+        rating: 8.0,
+        image: "https://via.placeholder.com/300x400?text=La+La+Land"
+    },
+    {
+        title: "The Notebook",
+        type: "Movie",
+        genre: "Romance",
+        description: "A timeless love story about two people from very different backgrounds.",
+        year: 2004,
+        rating: 7.8,
+        image: "https://via.placeholder.com/300x400?text=The+Notebook"
+    },
+    {
+        title: "Titanic",
+        type: "Movie",
+        genre: "Romance",
+        description: "A young couple falls in love aboard the legendary Titanic.",
+        year: 1997,
+        rating: 7.9,
+        image: "https://via.placeholder.com/300x400?text=Titanic"
+    },
+    {
+        title: "Bridgerton",
+        type: "Series",
+        genre: "Romance",
+        description: "A young woman navigates love and society during the Regency era.",
+        year: 2020,
+        rating: 7.4,
+        image: "https://via.placeholder.com/300x400?text=Bridgerton"
+    },
+    {
+        title: "The Conjuring",
+        type: "Movie",
+        genre: "Horror",
+        description: "A family experiences terrifying supernatural events in their new home.",
+        year: 2013,
+        rating: 7.5,
+        image: "https://via.placeholder.com/300x400?text=Conjuring"
+    },
+    {
+        title: "IT",
+        type: "Movie",
+        genre: "Horror",
+        description: "A group of children confront a terrifying supernatural entity.",
+        year: 2017,
+        rating: 7.3,
+        image: "https://via.placeholder.com/300x400?text=IT"
+    },
+    {
+        title: "A Quiet Place",
+        type: "Movie",
+        genre: "Horror",
+        description: "A family must remain completely silent to survive mysterious creatures.",
+        year: 2018,
+        rating: 7.5,
+        image: "https://via.placeholder.com/300x400?text=Quiet+Place"
+    },
+    {
+        title: "Stranger Things",
+        type: "Series",
+        genre: "Horror",
+        description: "A group of friends encounter strange supernatural events in their town.",
+        year: 2016,
+        rating: 8.6,
+        image: "https://via.placeholder.com/300x400?text=Stranger+Things"
+    },
+    {
+        title: "Inception",
+        type: "Movie",
+        genre: "Thriller",
+        description: "A skilled thief enters dreams to steal valuable secrets.",
+        year: 2010,
+        rating: 8.8,
+        image: "https://via.placeholder.com/300x400?text=Inception"
+    },
+    {
+        title: "Gone Girl",
+        type: "Movie",
+        genre: "Thriller",
+        description: "A man becomes the center of attention when his wife mysteriously disappears.",
+        year: 2014,
+        rating: 8.1,
+        image: "https://via.placeholder.com/300x400?text=Gone+Girl"
+    },
+    {
+        title: "Shutter Island",
+        type: "Movie",
+        genre: "Thriller",
+        description: "A detective investigates a mysterious disappearance at a remote hospital.",
+        year: 2010,
+        rating: 8.2,
+        image: "https://via.placeholder.com/300x400?text=Shutter+Island"
+    },
+    {
+        title: "Breaking Bad",
+        type: "Series",
+        genre: "Thriller",
+        description: "A chemistry teacher enters the dangerous world of producing illegal drugs.",
+        year: 2008,
+        rating: 9.5,
+        image: "https://via.placeholder.com/300x400?text=Breaking+Bad"
+    }
+];
+
+document.getElementById("recommendForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const selectedGenre = document.getElementById("genre").value;
+    const container = document.getElementById("recommendations");
+
+    const results = content.filter(item => item.genre === selectedGenre);
+
+    let html = `
+        <h2 class="section-title">Recommendations</h2>
+        <div class="card-container">
+    `;
+
+    if (results.length === 0) {
+        html += "<p>No recommendations found.</p>";
+    } else {
+        results.forEach(item => {
+            html += `
+                <div class="card">
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="card-content">
+                        <h3>${item.title}</h3>
+                        <p class="genre">${item.genre}</p>
+                        <p class="rating">⭐ ${item.rating}/10</p>
+                        <p>${item.description}</p>
+                        <p><br>${item.type} • ${item.year}</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    html += "</div>";
+    container.innerHTML = html;
+});
+</script>
+
+</body>
+</html>
